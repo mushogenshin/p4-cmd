@@ -232,7 +232,7 @@ impl P4 {
             .map(path::PathBuf::as_path)
             .unwrap_or_else(|| path::Path::new("p4"));
         let mut cmd = process::Command::new(p4_cmd);
-        cmd.args(&["-Gs", "-C utf8"]);
+        // cmd.args(&["-Gs", "-C utf8"]);
         if let Some(ref port) = self.port {
             cmd.args(&["-p", port.as_str()]);
         }
@@ -612,7 +612,8 @@ impl str::FromStr for FileType {
             .map(|f| {
                 let modifiers: FileTypeModifiers = f.parse()?;
                 Ok(modifiers)
-            }).map_or(Ok(None), |r| r.map(Some))?;
+            })
+            .map_or(Ok(None), |r| r.map(Some))?;
 
         let ft = FileType {
             base,
