@@ -267,7 +267,7 @@ pub(crate) fn to_timestamp(time: &Time) -> i64 {
 }
 
 pub(crate) fn from_timestamp(timestamp: i64) -> Time {
-    chrono::Utc.timestamp(timestamp, 0)
+    chrono::Utc.timestamp_opt(timestamp, 0).unwrap()
 }
 
 /// Action performed on a file at a given revision.
